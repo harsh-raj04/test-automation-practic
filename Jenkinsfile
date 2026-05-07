@@ -7,14 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    echo '========== Checking out source code =========='
-                    checkout scm
-                }
-            }
-        }
 
         stage('Pull Docker Image') {
             steps {
@@ -29,13 +21,7 @@ pipeline {
             steps {
                 script {
                     echo '========== Running tests in Docker container =========='
-                    sh """
-                        docker run --rm \
-                            -v "${WORKSPACE}":/app \
-                            -w /app \
-                            ${DOCKER_IMAGE} \
-                            mvn clean test
-                    """
+                    sh '/bin/bash -c "docker run --rm -v ${WORKSPACE}:/app -w /app ${DOCKER_IMAGE} mvn clean test"'
                 }
             }
         }
