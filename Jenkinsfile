@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "harshraj04/test-automation-1:latest"
-        DOCKER_CMD = "/usr/local/bin/docker"
+        PATH = "/usr/local/bin:${env.PATH}"
     }
 
     stages {
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo "========== Pulling Docker image: ${DOCKER_IMAGE} =========="
-                    sh "${DOCKER_CMD} pull ${DOCKER_IMAGE}"
+                    sh "docker pull ${DOCKER_IMAGE}"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                 script {
                     echo '========== Running tests in Docker container =========='
                     sh """
-                        ${DOCKER_CMD} run --rm \
+                        docker run --rm \
                             -v "${WORKSPACE}":/app \
                             -w /app \
                             ${DOCKER_IMAGE} \
