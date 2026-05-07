@@ -44,7 +44,7 @@ pipeline {
             echo '✅ All tests passed!'
         }
         failure {
-            echo '❌ Build failed!'
+            echo '❌ Build failed! Please check the logs for details.'
         }
     }
 }
