@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "harshraj04/test-automation-1:latest"
-        PATH = "/usr/local/bin:${env.PATH}"
+        PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     }
 
     stages {
